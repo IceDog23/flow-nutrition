@@ -76,14 +76,14 @@
  {% capture emptyTitle %}{% endcapture %}
 {% endif %}
   <script async src="https://d2xvgzwm836rzd.cloudfront.net/lazysizes-bloggle.min.js" defer></script>
-  <link href="https://d2xvgzwm836rzd.cloudfront.net/blog_styles--mindflow-cz.min.css?v=1692084953150" type="text/css" rel="stylesheet">
+  <link href="https://d2xvgzwm836rzd.cloudfront.net/blog_styles--mindflow-cz.min.css?v=1701528549061" type="text/css" rel="stylesheet">
   <link href="https://d2xvgzwm836rzd.cloudfront.net/blog-layout.min.css" type="text/css" rel="stylesheet">
 
 <div id="bloggle--blog_layout"  class="{%if localization.language.iso_code == "ar" or localization.language.iso_code == "he" %} blggle-rtl{%endif%}">
 {% if blog.articles_count == 0 %}
   <div class="bloggle--header bloggle--header-empty">
     <h1 id="bloggle--blog-title" class="text__center "></h1>
-    <a style="max-width: 300px;margin-left: auto;margin-right: auto;margin-top: 20px;" class="btn-green btn" href="/">{{backHome}}</a>
+    <a style="max-width: 300px;margin-left: auto;margin-right: auto;margin-top: 20px;" class="btn btn--secondary" href="/">{{backHome}}</a>
     <br /><br />
   </div>
 {% else %}
@@ -264,7 +264,12 @@
   var navigationLinks = document.getElementsByClassName('bloggle--nav-item');
   if (navigationLinks.length > 0) {
     for (let i = 0; i < navigationLinks.length ; i++) {
-      if (canonicalUrl.indexOf(navigationLinks[i].getAttribute("href")) > -1 ) {
+        let href = navigationLinks[i].getAttribute("href");
+        let isHrefInCanonical = canonicalUrl.indexOf(href) > -1;
+        function isHrefLastSegment(string, target) {
+            return string.substring(string.length - target.length) === target;
+          }
+      if (isHrefInCanonical && href && isHrefLastSegment(canonicalUrl, href)) {
         navigationLinks[i].classList.add("bloggle--active");
       } else {
         navigationLinks[i].classList.remove("bloggle--active");
