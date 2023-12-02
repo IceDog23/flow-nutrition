@@ -294,7 +294,7 @@
           <div class="price-qty-container">
             <div class="price-quantity">
               <div class="product__price">
-                {% include 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
+                {% render 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
               </div>
 
               <div class="qtydiv">
