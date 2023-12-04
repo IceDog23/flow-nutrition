@@ -8,7 +8,7 @@
     "main": {
       "type": "product-template",
       "settings": {
-        "show_quantity_selector": false,
+        "show_quantity_selector": true,
         "show_vendor": false,
         "enable_payment_button": false,
         "show_share_buttons": true,
