@@ -1231,6 +1231,7 @@
    // Select quantity
 
   $('input[type=radio][name=variant]').on('click', function() {
+    console.log('selected price')
     console.log($(this).data('price'))
     let price1 = $(this).closest('.selector-container').find('.variant-price').html().trim().split(' ')
     let test2 = price1.pop()
