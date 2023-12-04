@@ -1240,7 +1240,7 @@
     console.log(itemPrice)
     // console.log('itemPrice' + itemPrice)
 
-    var qty = parseInt($('.quantity-input').val());
+    var qty = parseInt($('.quantity-input').val()) || 1;
 
 
     let currency = $('.price-item').html().trim().split(' ').last()
