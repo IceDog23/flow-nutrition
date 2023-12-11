@@ -318,13 +318,6 @@
               "collection-url": "shopify:\/\/collections\/produkty"
             }
           },
-          "c571e43a-5090-4b78-941a-c89f312a16fc": {
-            "type": "collection_item",
-            "settings": {
-              "collection-title": "Na podzim",
-              "collection-url": "shopify:\/\/collections\/na-podzim"
-            }
-          },
           "305250c7-c4d5-4528-927c-26284d003fbc": {
             "type": "collection_item",
             "settings": {
@@ -384,7 +377,6 @@
         },
         "block_order": [
           "69571a32-8816-4632-b833-90e366e3c70d",
-          "c571e43a-5090-4b78-941a-c89f312a16fc",
           "305250c7-c4d5-4528-927c-26284d003fbc",
           "c9cb885b-6e8b-46cb-ad71-2010fc184d9c",
           "69363732-809e-45c2-bbd2-6adb84e9759f",
