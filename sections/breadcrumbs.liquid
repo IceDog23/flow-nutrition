@@ -2,41 +2,41 @@
     <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
         <a href="/" title="Home">Home</a>
         {% if template contains 'page' %}
-            <span aria-hidden="true">{% include 'right-arrow' %}</span>
+            <span aria-hidden="true">{% render 'right-arrow' %}</span>
             <span>{{ page.title }}</span>
         {% elsif template contains 'product' %}
             {% if collection.url %}
-                <span aria-hidden="true">{% include 'right-arrow' %}</span>
+                <span aria-hidden="true">{% render 'right-arrow' %}</span>
                 {{ collection.title | link_to: collection.url }}
             {% else %}
-                <span aria-hidden="true">{% include 'right-arrow' %}</span>
+                <span aria-hidden="true">{% render 'right-arrow' %}</span>
                 <a href="/collections/produkty">Produkty</a>
             {% endif %}
-            <span aria-hidden="true">{% include 'right-arrow' %}</span>
+            <span aria-hidden="true">{% render 'right-arrow' %}</span>
             <span>{{ product.title }}</span>
         {% elsif template contains 'collection' and collection.handle %}
-            <span aria-hidden="true">{% include 'right-arrow' %}</span>
+            <span aria-hidden="true">{% render 'right-arrow' %}</span>
             {% if current_tags %}
                 {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
                 {{ collection.title | link_to: url }}
-                <span aria-hidden="true">{% include 'right-arrow' %}</span>
+                <span aria-hidden="true">{% render 'right-arrow' %}</span>
                 <span>{{ current_tags | join: ' + ' }}</span>
             {% else %}
                 <span>{{ collection.title }}</span>
             {% endif %}
         {% elsif template == 'blog' %}
-            <span aria-hidden="true">{% include 'right-arrow' %}</span>
+            <span aria-hidden="true">{% render 'right-arrow' %}</span>
             {% if current_tags %}
                 {{ blog.title | link_to: blog.url }}
-                <span aria-hidden="true">{% include 'right-arrow' %}</span>
+                <span aria-hidden="true">{% render 'right-arrow' %}</span>
                 <span>{{ current_tags | join: ' + ' }}</span>
             {% else %}
                 <span>{{ blog.title }}</span>
             {% endif %}
         {% elsif template == 'article' %}
-            <span aria-hidden="true">{% include 'right-arrow' %}</span>
+            <span aria-hidden="true">{% render 'right-arrow' %}</span>
             {{ blog.title | link_to: blog.url }}
-            <span aria-hidden="true">{% include 'right-arrow' %}</span>
+            <span aria-hidden="true">{% render 'right-arrow' %}</span>
             <span>{{ article.title }}</span>
             <style>
                 @media (max-width: 767px){
@@ -49,7 +49,7 @@
                 }
             </style>
         {% else %}
-            <span aria-hidden="true">{% include 'right-arrow' %}</span>
+            <span aria-hidden="true">{% render 'right-arrow' %}</span>
             <span>{{ page_title }}</span>
         {% endif %}
     </nav>

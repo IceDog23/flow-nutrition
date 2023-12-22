@@ -1,6 +1,7 @@
 {% assign cards = product.metafields.section.cards %}
 {% assign url_s = shop.metafields.studie.url.value %}
 {% assign url_c = shop.metafields.certifikat.url.value %}
+
 <div class="item__wrapper">
     <div class="panal">
         <div class="section-cards-wrapper" id="slozeni">
@@ -10,8 +11,8 @@
                     <div style="display: flex;">
                         <!-- <div class="prev-review-slide"><img src="{{ 'arrow-left.svg' | asset_url }}" alt=""></div>
             <div class="next-review-slide"><img src="{{ 'arrow-right.svg' | asset_url }}" alt=""></div> -->
-                        <div class="prev-review-slide">{% include 'review_arrow_left' %}</div>
-                        <div class="next-review-slide">{% include 'review_arrow_right' %}</div>
+                        <div class="prev-review-slide">{% render 'review_arrow_left' %}</div>
+                        <div class="next-review-slide">{% render 'review_arrow_right' %}</div>
                     </div>
                 <h2>{{ cards.heading }}</h2>
               </div>
