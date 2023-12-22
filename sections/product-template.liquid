@@ -410,17 +410,20 @@
         {% endif %}
       </div>
     </div>
-    {% assign rich_text = product.metafields.section.rich_text %}
+    {% assign icons = product.metafields.description.product_icons.value %}
     <div class="product-shared-content mobile-show">
       <div class="container">
-        {% for block in rich_text.blocks %}
+        {% for icon in icons %}
+          <script>
+            console.log('icon {{ icon.icon.value | file_img_url }}')
+          </script>
           <div class="item">
-            <img width="30" height="30" loading="lazy" src="{{ block.icon }}">
-            <p>{{ block.heading }}</p>
-            {% if block.tooltip %}
-              <a href="{{ block.href }}">
+            {{ icon.icon.value | image_url: width: 30 | image_tag }}
+            <p>{{ icon.heading }}</p>
+            {% if icon.tooltip %}
+              <a href="{{ icon.href }}">
                 <div class="tooltip">
-                  {{ block.tooltip }}
+                  {{ icon.tooltip }}
                 </div>
               </a>
             {% endif %}
