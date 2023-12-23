@@ -414,9 +414,6 @@
     <div class="product-shared-content mobile-show">
       <div class="container">
         {% for icon in icons %}
-          <script>
-            console.log('icon {{ icon.icon.value | file_img_url }}')
-          </script>
           <div class="item">
             {{ icon.icon.value | image_url: width: 30 | image_tag }}
             <p>{{ icon.heading }}</p>
