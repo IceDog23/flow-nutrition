@@ -1,87 +1,106 @@
-{% comment %} Tab section with product features {% endcomment %}
-
-{% assign text_row = product.metafields.section.text_row %}
+{% comment %} {% assign text_row = product.metafields.section.text_row %}
 {% assign rich_text = product.metafields.section.rich_text %}
-{% assign pop_up = product.metafields.section.product_manual %}
+{% assign pop_up = product.metafields.section.product_manual %} {% endcomment %}
+
+{% liquid
+ assign content = product.metafields.description.product_manual.value
+ assign content_img = content.image
+ assign manual_d = content.manual_desktop.value
+ assign manual_m = content.manual_mobiles.value
+%}
+
+{% unless content == empty %}
 <div class="item__wrapper">
   <div class="panal">
-    <div id="more-info" class="page-width product-section section-text-row">
+    <div class="page-width product-section section-text-row">
       <div class="grid">
         <div class="text-row heading">
           <div class="image">
-            <img src="{{ text_row.image }}">
+            {% comment %} <img src="{{ text_row.image }}"> {% endcomment %}
+            {{ content_img.value | image_url: width: 580 | image_tag }}
           </div>
           <div class="heading-content">
-            <h2>{{ rich_text.heading }}</h2>
-            <p>{{ rich_text.text }}</p>
-            <div
-              class="popup__trigger"
-              data-defaultimg="{{section.settings.popup__image | img_url: 'master'}}"
-              data-defaultimgmobile="{{section.settings.mobile__popup__image | img_url: 'master'}}"
-              data-popupimg="{{product.metafields.my_fields.product_manual}}"
-              data-popupimgmobile="{{product.metafields.my_fields.product_manual_mobile}}"
+            <h2>{{ content.heading.value }}</h2>
+            <p>{{ content.description | metafield_tag }}</p>
+            <div class="popup__trigger"
+              {% comment %} data-popupimg="{{ product.metafields.my_fields.product_manual}}" {% endcomment %}
+              {% comment %} data-popupimgmobile="{{ product.metafields.my_fields.product_manual_mobile}}" {% endcomment %}
+              data-popupimg="{{ manual_d }}"
+              data-popupimgmobile="{{ manual_m }}"
             >
-              Zobrazit návod
+              {{ section.settings.btn_text }}
+            </div>
+            {% comment %} Popup for product manual {% endcomment %}
+            <div class="popup__wrapper overlay" id="{{ section.id }}">
+              {% comment %} <div class="overlay"></div> {% endcomment %}
+              <div class="popup__content">
+                <div class="close__popup">&#9587</div>
+                {{ manual_d | image_url: width: 1200 | image_tag }}
+                {% comment %} <img class="popup__img" src="#" alt=""> {% endcomment %}
+              </div>
             </div>
           </div>
-        </div>
-        <div class="heading-container">
-          <h2>{{ text_row.heading2 }}</h2>
-          {% for block in text_row.blocks %}
-            <div class="table-row-numbers text-row">
-              <div class="item title">
-                <div class="svg">0{{ forloop.index }}</div>
-                <h3>{{ block.heading }}</h3>
-              </div>
-              <div class="item content">
-                <p>{{ block.text }}</p>
-              </div>
-            </div>
-          {% endfor %}
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function(){
+{% endunless %}
 
-    console.log(document.querySelector('.popup__wrapper .popup__img'))
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function(){
+    // console.log(document.querySelector('.popup__wrapper .popup__img'))
     document.querySelector('.close__popup').addEventListener('click', function(){
       document.querySelector('.popup__wrapper').classList.toggle('active')
     })
-    document.querySelector('.overlay').addEventListener('click', function(){
-      document.querySelector('.popup__wrapper').classList.toggle('active')
-    })
-    document.querySelectorAll('.popup__trigger').forEach(item => {
-      item.addEventListener('click', function(){
-        document.querySelector('.popup__wrapper').classList.toggle('active')
-        if(window.innerWidth > 768){
-          console.log(this.dataset.popupimg)
-          if(this.dataset.popupimg){
-            document.querySelector('.popup__wrapper .popup__img').src = this.dataset.popupimg
-          }else{
-            document.querySelector('.popup__wrapper .popup__img').src = this.dataset.defaultimg
-          }
-        }else{
-          if(this.dataset.popupimg){
-            document.querySelector('.popup__wrapper .popup__img').src = this.dataset.popupimgmobile
-          }else{
-            document.querySelector('.popup__wrapper .popup__img').src = this.dataset.defaultimgmobile
-          }
-        }
-      })
-    })
-    document.querySelectorAll('.open__popup').forEach(item => {
-      item.addEventListener('click', function(){
-        document.querySelector('.popup__wrapper').classList.toggle('active')
-      })
+    document.querySelector('.popup__trigger').addEventListener('click', function() {
+      const popup = document.querySelector('.popup__wrapper').classList.toggle('active')
     })
   })
-</script>
 
-<style>
+
+// console.log('here')
+//   document.addEventListener('DOMContentLoaded', function(){
+
+//     // console.log(document.querySelector('.popup__wrapper .popup__img'))
+//     document.querySelector('.close__popup').addEventListener('click', function(){
+//       document.querySelector('.popup__wrapper').classList.toggle('active')
+//     })
+//     document.querySelector('.popup__trigger').addEventListener('click', () => {
+//       document.querySelector('.popup__wrapper').classList.toggle('active')
+//     })
+//     // document.querySelector('.overlay').addEventListener('click', function(){
+//     //   document.querySelector('.popup__wrapper').classList.toggle('active')
+//     // })
+//     // document.querySelectorAll('.popup__trigger').forEach(item => {
+//     //   item.addEventListener('click', function(){
+//     //     document.querySelector('.popup__wrapper').classList.toggle('active')
+//         // if(window.innerWidth > 768){
+//         //   console.log(this.dataset.popupimg)
+//         //   if(this.dataset.popupimg){
+//         //     document.querySelector('.popup__wrapper .popup__img').src = this.dataset.popupimg
+//         //   }else{
+//         //     document.querySelector('.popup__wrapper .popup__img').src = this.dataset.defaultimg
+//         //   }
+//         // }else{
+//         //   if(this.dataset.popupimg){
+//         //     document.querySelector('.popup__wrapper .popup__img').src = this.dataset.popupimgmobile
+//         //   }else{
+//         //     document.querySelector('.popup__wrapper .popup__img').src = this.dataset.defaultimgmobile
+//         //   }
+//         // }
+//       })
+//     })
+//     document.querySelectorAll('.open__popup').forEach(item => {
+//       item.addEventListener('click', function(){
+//         document.querySelector('.popup__wrapper').classList.toggle('active')
+//       })
+//     })
+//   })
+{% endjavascript %}
+
+{% style %}
   .popup__img{
     width: 100%;
   }
@@ -95,10 +114,6 @@
   .popup__content::-webkit-scrollbar {
     width: 7px;
   }
-  /* .popup__content::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 2px rgb(0 0 0 / 10%);
-      background: #ececec;
-  } */
   .close__popup{
     font-weight: 900;
     font-size: 20px;
@@ -124,10 +139,10 @@
     overflow-y: scroll;
   }
   .overlay{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100vh;
     height: 100vh;
     background-color: rgba(0, 0, 0, .4);
   }
@@ -162,7 +177,7 @@
     background: #C01616!important;
     cursor: pointer;
   }
-  .heading-container, .heading-content{
+  .heading-content{
     padding-left: 165px;
   }
   .text-row.heading .image img{
@@ -175,18 +190,6 @@
   }
   .image img{
     border-radius: 8px;
-  }
-  .heading-container h2{
-    font-size: 32px;
-    line-height: 42px;
-    margin-bottom: 28px;
-  }
-  .heading-container{
-    font-size: 32px;
-    line-height: 42px;
-    padding-bottom: 32px;
-    padding-left: 165px;
-    padding-right: 165px;
   }
   .text-center header{
     padding-left: 165px;
@@ -293,13 +296,10 @@
     }
   }
   @media (max-width: 1250px) {
-    .heading-container, .heading-content{
+    .heading-content{
       padding-left: 80px;
     }
     .text-row.heading .image img{
-      padding-right: 80px;
-    }
-    .heading-container{
       padding-right: 80px;
     }
   }
@@ -316,10 +316,7 @@
     }
   }
   @media (max-width: 970px) {
-    .heading-container{
-      padding-right: 30px;
-    }
-    .heading-container, .heading-content{
+    .heading-content{
       padding-left: 30px;
     }
     .text-row.heading .image img{
@@ -327,14 +324,8 @@
     }
   }
   @media (max-width: 768px) {
-    .heading-container{
-      padding-right: 16px;
-    }
     .section-cards .header h2{
       margin-right: 50px;
-    }
-    .heading-container{
-      padding-bottom: 0;
     }
     .text-row .item.content{
       width: 100%;
@@ -346,15 +337,12 @@
     .text-row.heading{
       padding-bottom: 0;
     }
-    .heading-container h2{
-      display: none;
-    }
     .text-row.heading .image img{
       width: 100%;
       padding: 0;
       border-radius: 0;
     }
-    .heading-container, .heading-content{
+    .heading-content{
       padding-left: 16px;
       padding-right: 16px;
       width: 100%;
@@ -434,4 +422,24 @@
       }
     }
   }
-</style>
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Product manual",
+  "settings": [
+    {
+      "label": "Button text",
+      "type": "text",
+      "id": "btn_text",
+      "default": "Zobrazit návod"
+    }, 
+    {
+      "label": "Default product manual", 
+      "id": "default_product_manual",
+      "type": "image_picker", 
+      "info": "Add in case proper manual doesn't load."
+    }
+  ]
+}
+{% endschema %}
