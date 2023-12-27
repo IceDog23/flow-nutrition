@@ -1,23 +1,26 @@
 {% comment %} Tab section with product features {% endcomment %}
 
-{% assign text_row = product.metafields.section.text_row %}
+{% comment %} {% assign text_row = product.metafields.section.text_row %}
 {% assign rich_text = product.metafields.section.rich_text %}
-{% assign pop_up = product.metafields.section.product_manual %}
+{% assign pop_up = product.metafields.section.product_manual %} {% endcomment %}
 
+{% assign features = product.metafields.description.produkt_feature.value %}
 
 <div class="item__wrapper">
   <div class="panal">
     <div class="page-width product-section section-text-row">
         <div class="heading-container">
-          <h2>{{ text_row.heading2 }}</h2>
-          {% for block in text_row.blocks %}
+          {% for feature in features %}
+          <script>
+            console.loog("feature {{ feature }}")
+          </script>
             <div class="table-row-numbers text-row">
               <div class="item title">
                 <div class="svg">0{{ forloop.index }}</div>
-                <h3>{{ block.heading }}</h3>
+                <h3>{{ feature.heading }}</h3>
               </div>
               <div class="item content">
-                <p>{{ block.text }}</p>
+                <p>{{ feature.description | metafield_tag }}</p>
               </div>
             </div>
           {% endfor %}
@@ -27,7 +30,7 @@
   </div>
 </div>
 
-<style>
+{% style %}
   .heading-container, .heading-content{
     padding-left: 165px;
   }
@@ -111,7 +114,7 @@
     color: #6C6E73;
     padding-left: 20px;
   }
-  .text-row .item p span{
+  .text-row .item p a{
     color: #FF4438;
   }
   .text-row .item p strong{
@@ -300,4 +303,4 @@
       }
     }
   }
-</style>
+{% endstyle %}
