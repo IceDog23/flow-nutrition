@@ -15,6 +15,9 @@
         "product_ingredients": {
             "type": "product_ingredients"
         },
+        "product_how_to_use": {
+            "type": "product_how_to_use"
+        },
         "about-product": {
             "type": "about-product"
         },
@@ -34,7 +37,7 @@
             "type": "product_tmp_code"
         }
     },
-    "order": ["breadcrumbs","main", "product_product_manual","product_product_features", "product_ingredients","about-product", "custom_reviews_app", 
+    "order": ["breadcrumbs","main", "product_product_manual","product_product_features", "product_ingredients", "product_how_to_use" ,"about-product", "custom_reviews_app", 
         "product_products-slider", "product_faq", "footer-newsletter",
         "product_tmp_code"]
   }
