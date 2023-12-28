@@ -1,28 +1,41 @@
 {% comment %} Tab section with product features {% endcomment %}
+
+<!-- Assigning product features data from metafields to a Liquid variable -->
 {% assign features = product.metafields.description.produkt_feature.value %}
 
+<!-- Main wrapper for the features section -->
 <div class="item__wrapper">
-  <div class="panal">
-    <div class="page-width product-section section-text-row">
-        <div class="heading-container">
-          {% for feature in features %}
-          <script>
-            console.loog("feature {{ feature }}")
-          </script>
-            <div class="table-row-numbers text-row">
-              <div class="item title">
-                <div class="svg">0{{ forloop.index }}</div>
-                <h3>{{ feature.heading }}</h3>
-              </div>
-              <div class="item content">
-                <p>{{ feature.description | metafield_tag }}</p>
-              </div>
+    <!-- Panel containing the content -->
+    <div class="panal">
+        <!-- Sets the width and layout of the product section -->
+        <div class="page-width product-section section-text-row">
+            <!-- Container for the heading and feature rows -->
+            <div class="heading-container">
+                <!-- Loop through each feature in the assigned variable -->
+                {% for feature in features %}
+                    <!-- Debugging script to log each feature in the console -->
+                    <script>
+                        console.loog("feature {{ feature }}")
+                    </script>
+                    <!-- Row for each feature -->
+                    <div class="table-row-numbers text-row">
+                        <!-- Title item for the feature -->
+                        <div class="item title">
+                            <!-- Displaying index of the feature in a stylized format -->
+                            <div class="svg">0{{ forloop.index }}</div>
+                            <!-- Feature heading -->
+                            <h3>{{ feature.heading }}</h3>
+                        </div>
+                        <!-- Content item for the feature -->
+                        <div class="item content">
+                            <!-- Feature description with metafield tags processed -->
+                            <p>{{ feature.description | metafield_tag }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-          {% endfor %}
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 {% style %}

@@ -6,11 +6,11 @@
         "main": {
             "type": "product-template"
         },
-        "product_product_manual": {
-            "type": "product_product_manual"
+        "product_manual": {
+            "type": "product_manual"
         },
-        "product_product_features": {
-            "type": "product_product_features"
+        "product_features": {
+            "type": "product_features"
         },
         "product_ingredients": {
             "type": "product_ingredients"
