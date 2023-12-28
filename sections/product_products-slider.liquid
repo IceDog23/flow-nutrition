@@ -19,74 +19,8 @@
                 </div>
             </div>
         </div>
-        <div class="feature-products">
-            {% comment %}
-            {% for block in section.blocks %}
-                {% assign prod = block.settings.product_item %}
-                <div class="product">
-                        <div class="image-wrapper">
-                            <a href="{{  all_products[prod].url }}">
-                                <img src="{{  all_products[prod] | img_url: 'master' }}" alt="">
-                            </a>
-                            <div class="add-to-cart-wrapper mobile">
-                                <form action="/cart/add" method="post" enctype="multipart/form-data"
-                                      id="add-to-cart-{{ all_products[prod].handle }}-{{ collection.handle }}-{{ section.id }}">
-                                    <input type="hidden" name="form_type" value="product">
-                                    <input type="hidden" name="quantity" value="1" min="1">
-                                    <input type="hidden" name="id" value="{{ all_products[prod].variants[0].id }}">
-                                    <div class="">
-                                        <div
-                                                name="add"
-                                                data-add-to-cart
-                                                class="js-go-cart-add-to-cart">
-                                            <img src="{{ 'add-btn-mobile.svg' | asset_url }}" alt="">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    <div class="product-content">
-                    <h3>
-                        <a href="{{  all_products[prod].url }}">
-                            {{ all_products[prod].title }}
-                        </a>
-                    </h3>
-                    {{ block.settings.text }}
-                    <ul class="feature-list">
-                        {% assign features = block.settings.features | split: "," %}
-                        {% for feature in features %}
-                            <li>
-                                <img src="{{ 'list-circle.svg' | asset_url }}" alt="list svg">
-                                {{ feature | strip_html }}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <div class="bottom-content">
-                    <div class="product-price">{{ all_products[prod].price | money }}</div>
-                        <div class="add-to-cart-wrapper">
-                            <form action="/cart/add" method="post" enctype="multipart/form-data"
-                                  id="add-to-cart-{{ all_products[prod].handle }}-{{ collection.handle }}-{{ section.id }}">
-                                <input type="hidden" name="form_type" value="product">
-                                <input type="hidden" name="quantity" value="1" min="1">
-                                <input type="hidden" name="id" value="{{ all_products[prod].variants[0].id }}">
-                                <div class="">
-                                    <div
-                                            name="add"
-                                            data-add-to-cart
-                                            class="js-go-cart-add-to-cart">
-                                        <img src="{{ 'add-button.svg' | asset_url }}" alt="">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            {% endfor %}
-            {%endcomment%}
-        </div>
+        <div class="feature-products"></div>
     </div>
-
 </div>
 {% endif %}
 
@@ -543,54 +477,54 @@
 
 {% schema %}
 {
-"name": "Products slider",
-"class": "index-section non-space",
-"settings": [
-{
-"type": "text",
-"id": "button_label",
-"label": "Button label"
-},
-{
-"type": "url",
-"id": "button_link",
-"label": "Button link"
-},
-{
-"type": "color",
-"id": "background_color",
-"label": "Background color"
-}
-],
-"blocks": [
-{
-"type": "product_item",
-"name": "Product",
-"settings": [
-{
-"type": "product",
-"id": "product_item",
-"label": "Product"
-},
-{
-"type": "richtext",
-"id": "text",
-"label": "Text"
-},
-{
-"type": "richtext",
-"id": "features",
-"label": "Features",
-"info": "Use ',' to separate each feature."
-}
-]
-}
-],
-"presets": [
-{
-"name": "Products slider",
-"category": "Slider"
-}
-]
+  "name": "Products slider",
+  "class": "index-section non-space",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_item",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product_item",
+          "label": "Product"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "features",
+          "label": "Features",
+          "info": "Use ',' to separate each feature."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products slider",
+      "category": "Slider"
+    }
+  ]
 }
 {% endschema %}

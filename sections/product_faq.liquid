@@ -1,54 +1,61 @@
-{% assign faq = product.metafields.section.faq %}
+<!-- Assigning FAQ data from product metafields to a Liquid variable -->
+{% assign faqs = product.metafields.description.product_faq.value %}
+
+<!-- Main container for the FAQ section -->
 <div id="faq">
-  <div class="page-width">
-    <div class="grid text-center">
-      <div class="accordion_wrapper">
-        <div class="heading_wrapper">
-          <div class="rich-text__heading">
-            <h2>{{ faq.heading }}</h2>
-          </div>
-        </div>
-        <div class="accordion" id="accordionFAQ">
-          {% for block in faq.blocks %}
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="heading{{ forloop.index }}">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse{{ forloop.index }}"
-                  aria-expanded="false"
-                  aria-controls="collapse{{ forloop.index }}"
-                >
-                  {{ block.heading }}
-                </button>
-              </h2>
-              <div
-                id="collapse{{ forloop.index }}"
-                class="accordion-collapse collapse"
-                aria-labelledby="heading{{ forloop.index }}"
-              >
-                <p
-                  style="
-                    margin: unset;
-                    margin-top: 24px;
-                  "
-                ></p>
-                <div class="accordion-body">
-                  <p>{{ block.text }}</p>
+    <!-- Sets the width of the content to match the page -->
+    <div class="page-width">
+        <!-- Grid layout for center alignment of text -->
+        <div class="grid text-center">
+            <!-- Wrapper for the accordion component -->
+            <div class="accordion_wrapper">
+                <!-- Wrapper for the heading -->
+                <div class="heading_wrapper">
+                    <div class="rich-text__heading">
+                        <!-- Section heading, dynamically loaded from section settings -->
+                        <h2>{{ section.settings.section_heading }}</h2>
+                    </div>
                 </div>
-              </div>
+                <!-- Accordion component for collapsible FAQ items -->
+                <div class="accordion" id="accordionFAQ">
+                    <!-- Loop through each FAQ item in the assigned variable -->
+                    {% for item in faqs %}
+                        <div class="accordion-item">
+                            <!-- Accordion header with dynamic ID for each item -->
+                            <h2 class="accordion-header" id="heading{{ forloop.index }}">
+                                <!-- Button to toggle the display of the accordion content -->
+                                <button
+                                    class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse{{ forloop.index }}"
+                                    aria-expanded="false"
+                                    aria-controls="collapse{{ forloop.index }}"
+                                >
+                                    <!-- Displaying the question of each FAQ item -->
+                                    {{ item.question }}
+                                </button>
+                            </h2>
+                            <!-- Collapsible content for each FAQ item -->
+                            <div
+                                id="collapse{{ forloop.index }}"
+                                class="accordion-collapse collapse"
+                                aria-labelledby="heading{{ forloop.index }}"
+                            >
+                                <div class="accordion-body">
+                                    <!-- Displaying the answer for each FAQ item -->
+                                    <p>{{ item.answer }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-          {% endfor %}
         </div>
-      </div>
     </div>
-    {% comment %}
-      <p class="faq-email">Máte jiné otázky? Napište nám na messengeru nebo mailu <a href="mailto:tym@mindflow.cz">tym@mindflow.cz</a></p>
-    {% endcomment %}
-  </div>
 </div>
-<style>
+
+{% style %}
   .rich-text__heading{
     padding: 80px 0 30px 0;
   }
@@ -202,4 +209,18 @@
 
     }
   }
-</style>
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "settings": [
+    {
+      "label": "Section heading",
+      "type": "text",
+      "id": "section_heading",
+      "default": "FAQ"
+    }
+  ]
+}
+{% endschema %}
