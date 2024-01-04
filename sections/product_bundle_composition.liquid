@@ -1,46 +1,7 @@
 {% assign rich_text = product.metafields.section.rich_text %}
 <div class="item__wrapper">
-  <div class="richtext-heading accordion2">
-      <p>{{section.settings.acordion1}}</p>
-  </div>
   <div class="panal">
-    <div class="rich-text" id="popis">
-      {%- comment -%}
-      <div class="rich-text-icons">
-        <a href="https://mindflow-cz.myshopify.com/pages/proc">
-        <div class="rich-text-icons-wrapper">
-          {% for block in rich_text.blocks %}
-            <div class="icon-wrapper">
-              <img src="{{ block.icon | append: '.svg' | asset_url }}" alt="{{ block.heading }} svg">
-              <p>{{ block.heading }}</p>
-            </div>
-          {% endfor %}
-        </div>
-        </a>
-      </div>
-      {%- endcomment -%}
-      {% if rich_text.extra_info != blank %}
-        <div class="extra-info-wrapper" id="slozeni">
-          <div class="section-label">{{ rich_text.extra_info.first.label }}</div>
-          <div class="rich-text__heading">
-            <h2>{{ rich_text.extra_info.first.heading }}</h2>
-          </div>
-          <div class="rich-text__text"><p>{{ rich_text.extra_info.first.text }}</p></div>
-        </div>
-      {% endif %}
-    </div>
-    {% if rich_text.extra_info.first.label %}
-    <div class="text-row heading">
-      <div class="image">
-      </div>
-      <div class="heading-content">
-        <h3>{{ rich_text.extra_info.first.heading }}</h3>
-        <p>{{ rich_text.extra_info.first.text }}</p>
-      </div>
-    </div>
-    {% endif %}
     {% if rich_text.lists != blank %}
-      {% include 'mindflow-product-section-text-row-revert' %}
       <div class="rich-text-lists item-1">
         {% for list in rich_text.lists %}
           <div class="lists-wrapper rich-text-upper">
@@ -54,30 +15,6 @@
         {% endfor %}
       </div>
     {% endif %}
-    <div class="container">
-      <div class="effects-bg rich-text-lists">
-        <div class="items-container">
-          <div>
-            <h1>Jak produkty užívat?</h1>
-          </div>
-          <div class="items-container items">
-            {% for effect in rich_text.effects %}
-              <div class="lists-wrapper effects-box">
-                <div class="img-text">
-                  <img class="icons-red" width="82px" height="82px" src="{{ effect.image }}" alt="">
-                  <p><strong class="l-title">{{ effect.heading }}</strong></p>
-                </div>
-                <ul  class="l-content">
-                  {% for effect in effect.info %}
-                    <li>{{ effect }}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 <style>
