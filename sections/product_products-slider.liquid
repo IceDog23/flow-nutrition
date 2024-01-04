@@ -25,9 +25,8 @@
 {% endif %}
 
 
-{{  'shopify-money.js' | asset_url | script_tag  }}
+<script src="{{ 'shopify-money.js' | asset_url }}" defer></script>
 {% assign image_size = 'grande' %}
-{% assign features = product.metafields.collection.features | split: "," %}
 <script>
     var recommendations = [];
     {% if featured_products %}
