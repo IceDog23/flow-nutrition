@@ -50,8 +50,10 @@
                                         <div class="info-title">{{ section.settings.more_info }}</div>
                                         <!-- Info item, conditionally hidden -->
                                         <div class="info-item {% if item.heading == 'Melatonin' %}hidden{% endif %}">
-                                            <a href="{% if item.study %}{{ item.study }}{% else %}#{% endif %}" target="_blank" >
-                                                {{ section.settings.icon_s | image_url: width: 16 | image_tag }}
+                                            <a href="{% if item.study %}{{ item.study }}{% else %}#{% endif %}" target="_blank">
+                                                {% if section.settings.icon_s %}
+                                                    {{ section.settings.icon_s | image_url: width: 16 | image_tag }}
+                                                {% endif %}
                                                 <span>{{ section.settings.text_s }}</span>
                                             </a>
                                         </div>
@@ -64,9 +66,10 @@
                                                     {{ item.certificate.value.src | image_url: width: 600 }}
                                                 {% else %}
                                                     #
-                                                {% endif %}" 
-                                                target="_blank">
-                                                {{ section.settings.icon_c | image_url: width: 16 | image_tag }}
+                                                {% endif %}" target="_blank">
+                                                {% if section.settings.icon_c %}
+                                                    {{ section.settings.icon_c | image_url: width: 16 | image_tag }}
+                                                {% endif %}
                                                 <span>{{ section.settings.text_c }}</span>
                                             </a>
                                         </div>
