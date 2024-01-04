@@ -1,103 +1,89 @@
-{% comment %} {% assign text_row = product.metafields.section.text_row %}
-{% assign rich_text = product.metafields.section.rich_text %}
-{% assign pop_up = product.metafields.section.product_manual %} {% endcomment %}
-
 {% liquid
-    assign content = product.metafields.description.product_manual.value
-    assign content_img = content.image
-    assign manual_d = content.manual_desktop.value
-    assign manual_m = content.manual_mobiles.value
+  # Assigns the 'content' variable with the value from product's metafield 'product_manual'
+  assign content = product.metafields.description.product_manual.value
+
+  # Retrieves the image associated with the content
+  assign content_img = content.image
+
+  # Assigns the desktop version of the manual from the content
+  assign manual_d = content.manual_desktop.value
+
+  # Assigns the mobile version of the manual from the content
+  assign manual_m = content.manual_mobiles.value
 %}
 
+{% comment %} Renders the following HTML only if 'content' is not empty {% endcomment %}
 {% unless content == empty %}
 <div class="item__wrapper">
-  <div class="panal">
-    <div class="page-width product-section section-text-row">
-      <div class="grid">
-        <div class="text-row heading">
-          <div class="image">
-            {% comment %} <img src="{{ text_row.image }}"> {% endcomment %}
-            {{ content_img.value | image_url: width: 580 | image_tag }}
-          </div>
-          <div class="heading-content">
-            <h2>{{ content.heading.value }}</h2>
-            <p>{{ content.description | metafield_tag }}</p>
+<div class="panal">
+  <div class="page-width product-section section-text-row">
+    <div class="grid">
+      <div class="text-row heading">
+        <div class="image">
+          {% comment %} Displays the content image with a width of 580 pixels {% endcomment %}
+          {{ content_img.value | image_url: width: 580 | image_tag }}
+        </div>
+        <div class="heading-content">
+          {% comment %} Displays the heading value from the content {% endcomment %}
+          <h2>{{ content.heading.value }}</h2>
+
+          {% comment %} Displays the description from the content as a metafield tag {% endcomment %}
+          <p>{{ content.description | metafield_tag }}</p>
+
+          {% comment %} Conditionally displays a popup trigger if either desktop or mobile manual is available {% endcomment %}
+          {% if manual_d != blank or manual_m != blank %}
+            {% comment %} Data attributes for popup image URLs for desktop and mobile {% endcomment %}
             <div class="popup__trigger"
-              {% comment %} data-popupimg="{{ product.metafields.my_fields.product_manual}}" {% endcomment %}
-              {% comment %} data-popupimgmobile="{{ product.metafields.my_fields.product_manual_mobile}}" {% endcomment %}
-              data-popupimg="{{ manual_d }}"
-              data-popupimgmobile="{{ manual_m }}"
+              data-popupimg="{{ manual_d.src | image_url: width: 1200 }}"
+              data-popupimgmobile="{{ manual_m.src | image_url: width: 500 }}"
             >
-              {{ section.settings.btn_text }}
-            </div>
-            {% comment %} Popup for product manual {% endcomment %}
-            <div class="popup__wrapper overlay" id="{{ section.id }}">
-              {% comment %} <div class="overlay"></div> {% endcomment %}
-              <div class="popup__content">
-                <div class="close__popup">&#9587</div>
-                {{ manual_d | image_url: width: 1200 | image_tag }}
-                {% comment %} <img class="popup__img" src="#" alt=""> {% endcomment %}
-              </div>
-            </div>
+            {% comment %} Displays button text set in section settings {% endcomment %}
+            {{ section.settings.btn_text }}
           </div>
+        {% endif %}
         </div>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 {% endunless %}
 
+
 {% javascript %}
-  document.addEventListener('DOMContentLoaded', function(){
-    // console.log(document.querySelector('.popup__wrapper .popup__img'))
-    document.querySelector('.close__popup').addEventListener('click', function(){
-      document.querySelector('.popup__wrapper').classList.toggle('active')
-    })
-    document.querySelector('.popup__trigger').addEventListener('click', function() {
-      const popup = document.querySelector('.popup__wrapper').classList.toggle('active')
-    })
-  })
+
+// Adding an event listener to the document for when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+
+// Adding a click event listener to the element with class 'close__popup'
+document.querySelector('.close__popup').addEventListener('click', function() {
+  // Toggles the 'active' class on the element with class 'popup__wrapper'
+  // This likely shows or hides the popup
+  document.querySelector('.popup__wrapper').classList.toggle('active')
+
+  // Resets the source of the popup image to default (empty string "#")
+  document.querySelector('#product_popup .popup__img').src = "#"
+})
+
+// Adding a click event listener to the element with class 'popup__trigger'
+document.querySelector('.popup__trigger').addEventListener('click', function() {
+  // Toggles the 'active' class on the element with class 'popup__wrapper'
+  // This likely shows or hides the popup
+  const popup = document.querySelector('.popup__wrapper').classList.toggle('active')
+
+  // Checks if the window's width is greater than 768 pixels (probably for desktop)
+  if (window.innerWidth > 768) {
+    // Sets the source of the popup image for desktop from data attribute 'data-popupimg'
+    document.querySelector('#product_popup .popup__img').src = this.dataset.popupimg
+  }
+  else {
+    // Sets the source of the popup image for mobile from data attribute 'data-popupimg'
+    document.querySelector('#product_popup .popup__img').src = this.dataset.popupimgmobile
+  }
+})
+})
 
 
-// console.log('here')
-//   document.addEventListener('DOMContentLoaded', function(){
-
-//     // console.log(document.querySelector('.popup__wrapper .popup__img'))
-//     document.querySelector('.close__popup').addEventListener('click', function(){
-//       document.querySelector('.popup__wrapper').classList.toggle('active')
-//     })
-//     document.querySelector('.popup__trigger').addEventListener('click', () => {
-//       document.querySelector('.popup__wrapper').classList.toggle('active')
-//     })
-//     // document.querySelector('.overlay').addEventListener('click', function(){
-//     //   document.querySelector('.popup__wrapper').classList.toggle('active')
-//     // })
-//     // document.querySelectorAll('.popup__trigger').forEach(item => {
-//     //   item.addEventListener('click', function(){
-//     //     document.querySelector('.popup__wrapper').classList.toggle('active')
-//         // if(window.innerWidth > 768){
-//         //   console.log(this.dataset.popupimg)
-//         //   if(this.dataset.popupimg){
-//         //     document.querySelector('.popup__wrapper .popup__img').src = this.dataset.popupimg
-//         //   }else{
-//         //     document.querySelector('.popup__wrapper .popup__img').src = this.dataset.defaultimg
-//         //   }
-//         // }else{
-//         //   if(this.dataset.popupimg){
-//         //     document.querySelector('.popup__wrapper .popup__img').src = this.dataset.popupimgmobile
-//         //   }else{
-//         //     document.querySelector('.popup__wrapper .popup__img').src = this.dataset.defaultimgmobile
-//         //   }
-//         // }
-//       })
-//     })
-//     document.querySelectorAll('.open__popup').forEach(item => {
-//       item.addEventListener('click', function(){
-//         document.querySelector('.popup__wrapper').classList.toggle('active')
-//       })
-//     })
-//   })
 {% endjavascript %}
 
 {% style %}
@@ -139,10 +125,10 @@
     overflow-y: scroll;
   }
   .overlay{
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100vh;
+    width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, .4);
   }
@@ -433,11 +419,11 @@
       "type": "text",
       "id": "btn_text",
       "default": "Zobrazit návod"
-    }, 
+    },
     {
-      "label": "Default product manual", 
+      "label": "Default product manual",
       "id": "default_product_manual",
-      "type": "image_picker", 
+      "type": "image_picker",
       "info": "Add in case proper manual doesn't load."
     }
   ]

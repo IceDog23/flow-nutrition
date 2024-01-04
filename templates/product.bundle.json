@@ -6,6 +6,9 @@
         "main": {
             "type": "product-template"
         },
+        "product_bundle_composition": {
+            "type": "product_bundle_composition"
+        },
         "product_manual": {
             "type": "product_manual"
         },
@@ -28,7 +31,7 @@
             "type": "product_tmp_code"
         }
     },
-    "order": ["breadcrumbs","main", "product_manual", "what_is_in_bundle",
+    "order": ["breadcrumbs","main", "product_bundle_composition", "product_manual", "what_is_in_bundle",
         "how_to_use_bundle", "custom_reviews_app", "product_faq", 
         "footer-newsletter", "product_tmp_code"]
   }

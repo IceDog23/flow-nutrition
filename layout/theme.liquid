@@ -289,10 +289,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script>
     var goCart = new GoCart();
   </script>
-  
-{% comment %} 
-{% if template.suffix == 'products' %}
-<div class="popup__wrapper">
+
+{% if template.name contains 'product' %}
+<div id = 'product_popup' class="popup__wrapper">
   <div class="overlay"></div>
   <div class="popup__content">
     <div class="close__popup">&#9587</div>
@@ -301,7 +300,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 {% endif %}
 
-  {% if product.tags contains 'Produkt'  %}
+  {% comment %} {% if product.tags contains 'Produkt' %}
     <div class="popup__wrapper">
       <div class="overlay"></div>
       <div class="popup__content">
@@ -309,8 +308,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <img class="popup__img" src="#" alt="">
       </div>
     </div>
-  {% endif %}  {% endcomment %}
-
+  {% endif %}   {% endcomment %}
 <script>
   let review_header = document.querySelector(".spr-header-title");
   if (review_header.classList.contains("no_reviews")) {
