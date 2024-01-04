@@ -16,10 +16,9 @@
           <div class="items-container items">
               <div class="lists-wrapper effects-box">
                 <div class="img-text">
-                  {% comment %} <img class="icons-red" width="82px" height="82px" src="{{ effect.image }}" alt=""> {% endcomment %}
-                  {% unless section.settings.icon_l == empty %}
+                  {% if section.settings.icon_l %}
                     {{ section.settings.icon_l.src | image_url: width: 80 | image_tag }}
-                  {% endunless %}
+                  {% endif %}
                   <p><strong class="l-title">{{ section.settings.text_l }}</strong></p>
                 </div>
                 <ul  class="l-content">
@@ -34,10 +33,9 @@
               </div>
             <div class="lists-wrapper effects-box">
               <div class="img-text">
-                {% comment %} <img class="icons-red" width="82px" height="82px" src="{{ effect.image }}" alt=""> {% endcomment %}
-                {% unless section.settings.icon_m == empty %}
+                {% if section.settings.icon_m %}
                     {{ section.settings.icon_m.src | image_url: width: 80 | image_tag }}
-                {% endunless %}
+                {% endif %}
                 <p><strong class="l-title">{{ section.settings.text_m }}</strong></p>
               </div>
               <ul  class="l-content">
@@ -54,9 +52,9 @@
             <div class="lists-wrapper effects-box">
               <div class="img-text">
                 {% comment %} <img class="icons-red" width="82px" height="82px" src="{{ effect.image }}" alt=""> {% endcomment %}
-                {% unless section.settings.icon_r == empty %}
+                {% if section.settings.icon_r %}
                     {{ section.settings.icon_r.src | image_url: width: 80 | image_tag }}
-                {% endunless %}
+                {% endif %}
                 <p><strong class="l-title">{{ section.settings.text_r }}</strong></p>
               </div>
               <ul  class="l-content">
