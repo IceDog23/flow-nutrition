@@ -6,11 +6,8 @@
         "main": {
             "type": "product-template"
         },
-        "product_text_row": {
-            "type": "product_text_row"
-        },
-        "product_products-slider": {
-            "type": "product_products-slider"
+        "product_features": {
+            "type": "product_features"
         },
         "footer-newsletter": {
             "type": "footer-newsletter"
@@ -19,7 +16,6 @@
             "type": "product_tmp_code"
         }
     },
-    "order": ["breadcrumbs","main", "product_text_row", 
-        "product_products-slider", "footer-newsletter",
-        "product_tmp_code"]
+    "order": ["breadcrumbs","main", "product_features", 
+        "footer-newsletter", "product_tmp_code"]
   }

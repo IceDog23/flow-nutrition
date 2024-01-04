@@ -3,10 +3,10 @@
 {% assign pop_up = product.metafields.section.product_manual %} {% endcomment %}
 
 {% liquid
- assign content = product.metafields.description.product_manual.value
- assign content_img = content.image
- assign manual_d = content.manual_desktop.value
- assign manual_m = content.manual_mobiles.value
+    assign content = product.metafields.description.product_manual.value
+    assign content_img = content.image
+    assign manual_d = content.manual_desktop.value
+    assign manual_m = content.manual_mobiles.value
 %}
 
 {% unless content == empty %}

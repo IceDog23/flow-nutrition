@@ -1,0 +1,393 @@
+{% liquid
+    assign bundle = product.metafields.description.product_bundle_how_to.value
+    assign morning = bundle.morning.value
+    assign before= bundle.before.value
+    assign evening = bundle.evening.value
+%}
+
+<div class="item__wrapper">
+  <div class="panal">
+    <div class="container">
+      <div class="effects-bg rich-text-lists">
+        <div class="items-container">
+          <div>
+            <h1>Jak produkty užívat?</h1>
+          </div>
+          <div class="items-container items">
+              <div class="lists-wrapper effects-box">
+                <div class="img-text">
+                  {% comment %} <img class="icons-red" width="82px" height="82px" src="{{ effect.image }}" alt=""> {% endcomment %}
+                  {% unless section.settings.icon_l == empty %}
+                    {{ section.settings.icon_l.src | image_url: width: 80 | image_tag }}
+                  {% endunless %}
+                  <p><strong class="l-title">{{ section.settings.text_l }}</strong></p>
+                </div>
+                <ul  class="l-content">
+                    {% for item in morning %}
+                        {% assign p = all_products[item.product] %}
+                        <li>                            
+                            {{ p.title | link_to: p.url }}
+                            {{ item.note }}
+                        </li>
+                    {% endfor %}
+                </ul>
+              </div>
+            <div class="lists-wrapper effects-box">
+              <div class="img-text">
+                {% comment %} <img class="icons-red" width="82px" height="82px" src="{{ effect.image }}" alt=""> {% endcomment %}
+                {% unless section.settings.icon_m == empty %}
+                    {{ section.settings.icon_m.src | image_url: width: 80 | image_tag }}
+                {% endunless %}
+                <p><strong class="l-title">{{ section.settings.text_m }}</strong></p>
+              </div>
+              <ul  class="l-content">
+                {% for item in before %}
+                        {% assign p = all_products[item.product] %}
+                        <li>                            
+                            {{ p.title | link_to: p.url }}
+                            {{ item.note }}
+                        </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="lists-wrapper effects-box">
+              <div class="img-text">
+                {% comment %} <img class="icons-red" width="82px" height="82px" src="{{ effect.image }}" alt=""> {% endcomment %}
+                {% unless section.settings.icon_r == empty %}
+                    {{ section.settings.icon_r.src | image_url: width: 80 | image_tag }}
+                {% endunless %}
+                <p><strong class="l-title">{{ section.settings.text_r }}</strong></p>
+              </div>
+              <ul  class="l-content">
+                {% for item in evening %}
+                    {% assign p = all_products[item.product] %}
+                    <li>                            
+                        {{ p.title | link_to: p.url }}
+                        {{ item.note }}
+                    </li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% style %}
+  .items ul li a{
+    color: #000000 !important;
+  }
+  .img-text{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 10px;
+  }
+  .container{
+    max-width: 100%;
+    background-color: #F5F6F7;
+  }
+  .items-container{
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    width: 100%;
+  }
+  .items{
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+  }
+  .effects-bg{
+    display: flex;
+    flex-direction: column;
+  }
+  .effects-box {
+    border-radius: 8px;
+    border: #E4E7E9 1px solid;
+    background-color: #ffffff;
+    width: 500px;
+  }
+  .rich-text-lists h1{
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 42px;
+    font-family: Graphik-Regular;
+  }
+  .l-content{
+   color: #000000;
+ }
+  .effects-box li{
+    color: black;
+  }
+
+  .panal.el_hide{
+    overflow: hidden;
+    transition: all .5s ease-out;
+    max-height: 0;
+  }
+
+  .panal{
+    overflow: hidden;
+    transition: all .5s ease-out;
+    max-height: fit-content;
+  }
+
+.rich-text-lists {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  padding: 115px 165px 75px 165px;;
+}
+
+.rich-text-lists .lists-wrapper { padding: 30px; position: relative;}
+
+.rich-text-lists .lists-wrapper ul { padding-left: 2rem; margin-bottom: .5rem; }
+
+.rich-text-lists .lists-wrapper ul li { list-style: disc; font-size: 16px; }
+
+/* Mindflow text row */
+  .rich-text-lists p>strong{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 36px;
+    max-width: 225px;
+    display: block;
+    color: #222222;
+    font-family: "Graphik-Regular";
+  }
+  .rich-text-lists .effects-box ul li a{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 28px;
+    text-decoration-line: underline;
+    color: -moz-default-color;
+  }
+  .rich-text-lists .lists-wrapper ul li a{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 28px;
+    text-decoration-line: underline;
+    color: #FF4438;
+  }
+
+  .rich-text-lists .lists-wrapper ul li{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    position: relative;
+    line-height: 28px;
+    list-style: none;
+    color: #6C6E73;
+  }
+  .rich-text-lists .lists-wrapper ul li:before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: #E9ECEE;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .rich-text-lists .lists-wrapper ul li:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -26px;
+    width: 4px;
+    height: 4px;
+    background: black;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+  }
+
+  @media (max-width: 1250px) {
+    .items-container{
+      justify-content: center;
+    }
+    .rich-text-lists.effects-bg{
+      padding-right: 80px;
+      padding-left: 80px;
+    }
+    .rich-text-lists{
+      padding-right: 80px;
+      padding-left: 80px;
+    }
+  }
+  @media (max-width: 970px) {
+    .rich-text-lists.effects-bg{
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+    .rich-text-lists{
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+  }
+
+    @media(max-width:768px){
+      .item-1{
+        margin-bottom: 30px;
+      }
+      .rich-text-lists h1 {
+        margin: 32px 0;
+      }
+      .rich-text-lists h1{
+        font-size: 24px;
+        line-height: 26px;
+        text-align: left;
+      }
+      .items{
+        gap: 16px;
+      }
+      .img-text{
+        padding: 0;
+      }
+      .panal{
+        max-height: unset;
+      }
+      .items-container{
+        display: block;
+        width: 100%;
+      }
+      .rich-text-lists.effects-bg{
+        padding: 0 16px 42px 16px;
+      }
+      .items {
+        display: flex;
+        flex-direction: column;
+      }
+      .lists-wrapper{
+        padding: 15px;
+      }
+      .rich-text-lists {
+        flex-direction: column;
+        /* padding: 0 30px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+  .rich-text-lists .lists-wrapper{
+    border-top: 1px solid #E4E7E9;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .lists-wrapper p{
+    margin: 0;
+  }
+
+  .rich-text-lists p>strong{
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .rich-text-lists .lists-wrapper ul{
+    margin-top: 16px;
+  }
+
+  .rich-text-lists{
+    flex-direction: column;
+    padding: 0 16px;
+  }
+
+      .l-content{
+        display: none;
+      }
+
+      .lists-wrapper p:after {
+        content: url("{{ "dropdown-arrow.svg" | asset_url }}");
+        position: absolute;
+        top: 27px;
+        right: 10px;
+      }
+      .lists-wrapper p.visible:after {
+        content: url("{{ "dropdown-red-arrow.svg" | asset_url }}");
+        font-size: 15px;
+        position: absolute;
+        top: 27px;
+        right: 10px;
+      }
+      .l-content.visible{
+        display: block;
+      }
+}
+
+{% endstyle %}
+
+{% javascript %}
+
+  if ($(window).width() < 749) {
+    var titleTrigger = $('.lists-wrapper p');
+    titleTrigger.click(function (){
+      $(this).closest(".lists-wrapper").find('.l-content').slideToggle(250);
+      if ( $(this).hasClass('visible')){
+        $(this).removeClass('visible');
+      } else {
+        if ($('.lists-wrapper p').not(this).hasClass('visible')){
+          $('.lists-wrapper p.visible ').not(this).closest(".lists-wrapper").find('.l-content').slideToggle(250);
+          $('.lists-wrapper p').not(this).removeClass('visible');
+
+        }
+        $(this).addClass('visible');
+      }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Product bundle how to use",
+  "settings": [
+    {
+      "label": "Text left",
+      "type": "text",
+      "id": "text_l",
+      "default": "Ráno"
+    },
+    {
+      "label": "Icon left",
+      "type": "image_picker",
+      "id": "icon_l"
+    },
+    {
+      "label": "Text middle",
+      "type": "text",
+      "id": "text_m",
+      "default": "Před efektem"
+    },
+    {
+      "label": "Icon middle",
+      "type": "image_picker",
+      "id": "icon_m"
+    },
+    {
+      "label": "Text right",
+      "type": "text",
+      "id": "text_r",
+      "default": "Večer"
+    },
+    {
+      "label": "Icon right",
+      "type": "image_picker",
+      "id": "icon_r"
+    }
+  ]
+}
+{% endschema %}

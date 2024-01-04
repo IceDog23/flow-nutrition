@@ -6,11 +6,14 @@
         "main": {
             "type": "product-template"
         },
-        "product_richtext": {
-            "type": "product_richtext"
+        "product_manual": {
+            "type": "product_manual"
         },
-        "product_products-slider": {
+        "what_is_in_bundle": {
             "type": "product_products-slider"
+        },
+        "how_to_use_bundle": {
+            "type": "product_how_to_use_bundle"
         },
         "custom_reviews_app": {
             "type": "custom_reviews_app"
@@ -25,7 +28,7 @@
             "type": "product_tmp_code"
         }
     },
-    "order": ["breadcrumbs","main", "product_richtext", "product_products-slider", 
-        "custom_reviews_app", "product_faq", "footer-newsletter",
-        "product_tmp_code"]
+    "order": ["breadcrumbs","main", "product_manual", "what_is_in_bundle",
+        "how_to_use_bundle", "custom_reviews_app", "product_faq", 
+        "footer-newsletter", "product_tmp_code"]
   }
