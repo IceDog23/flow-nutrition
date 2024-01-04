@@ -1,553 +1,212 @@
-{% assign rich_text = product.metafields.section.rich_text %}
+{% assign bundle = product.metafields.description.product_bundle_composition.value %}
+
 <div class="item__wrapper">
-  <div class="panal">
-    {% if rich_text.lists != blank %}
-      <div class="rich-text-lists item-1">
-        {% for list in rich_text.lists %}
-          <div class="lists-wrapper rich-text-upper">
-            <p><strong class="l-title">{{ list.heading }}</strong></p>
-            <ul class="l-content">
-              {% for item in list.list %}
-                <li>{{ item }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+    <div class="panal">
+      <!-- Check if 'bundle' variable is not blank -->
+      {% if bundle != empty %}
+        <div class="rich-text-lists item-1">
+          <!-- Loop over each 'bundle variant' in the 'bundle' -->
+          {% for bundle_variant in bundle %}
+            <div class="lists-wrapper rich-text-upper">
+              <!-- Display the heading of the bundle_variant -->
+              <p><strong class="l-title">{{ bundle_variant.heading }}</strong></p>
+              <ul class="l-content">
+                <!-- Loop over each 'product' in the 'bundle_variant.products.value' -->
+                {% for product in bundle_variant.products.value %}
+                  <!-- Assign the product from 'all_products' collection using the product's product identifier -->
+                  {% assign p = all_products[product.product] %}
+                  <li>
+                    <!-- Create a link to the product's page with the product title as the link text -->
+                    {{ p.title | link_to: p.url }}
+                    <!-- Display additional note for the product -->
+                    {{ product.note }}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
   </div>
-</div>
-<style>
-  .rich-text-upper{
-    padding: 0!important;
-  }
-  .items ul li a{
-    color: #000000 !important;
-  }
-  .img-text{
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
-    gap: 12px;
-    padding-bottom: 10px;
-  }
-  .container{
-    max-width: 100%;
-    background-color: #F5F6F7;
-  }
-  .items-container{
-    display: flex;
-    margin: auto;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 18px;
-    width: 100%;
-  }
-  .items{
-    display: flex;
-    flex-direction: row;
-    gap: 35px;
-  }
-  .effects-bg{
-    display: flex;
-    flex-direction: column;
-  }
-  .effects-box {
-    border-radius: 8px;
-    border: #E4E7E9 1px solid;
-    background-color: #ffffff;
-    width: 500px;
-  }
-  .rich-text-lists h1{
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 42px;
-    font-family: Graphik-Regular;
-  }
-  .l-content{
-   color: #000000;
- }
-  .effects-box li{
-    color: black;
-  }
 
-  .accordion2{
-    width: 100%;
-  }
-  .panal.el_hide{
-    overflow: hidden;
-    transition: all .5s ease-out;
-    max-height: 0;
-  }
-  .panal{
-    overflow: hidden;
-    transition: all .5s ease-out;
-    max-height: fit-content;
-  }
-  .richtext-heading p{
-    color: #000;
-  }
-  .text-row.heading .image img {
-    width: 100%;
-    border-radius: 8px;
-  }
-  .heading-content{
-    margin-left: 128px;
-    width: 50%;
-  }
-
-  .richtext-heading{
-    font-size: 14px;
-    line-height: 24px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    max-width: 1167px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 0 20px;
-    font-size: 19px;
-    font-weight: 400;
-    font-family: 'Graphik-Regular';
-  }
-  .rich-text {
-  padding: 0 20px;
-  margin-top: 20px;
-}
-
-.rich-text-lists {
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-  padding: 115px 165px 75px 165px;;
-}
-
-.rich-text-lists .lists-wrapper { padding: 30px; position: relative;}
-
-.rich-text-lists .lists-wrapper ul { padding-left: 2rem; margin-bottom: .5rem; }
-
-.rich-text-lists .lists-wrapper ul li { list-style: disc; font-size: 16px; }
-
-.rich-text-wrapper,
-.extra-info-wrapper {
-  margin: 0 auto;
-  text-align: center;
-}
-
-
-.extra-info-wrapper { max-width: 652px; margin-top: 6rem; padding-bottom: 2rem; }
-
-.extra-info-wrapper .rich-text__heading { padding: 0; }
-
-.rich-text-icons-wrapper {
-  display: flex;
-  justify-content: space-around;
-  max-width: 1120px;
-  margin: 114px auto;
-  text-align: center;
-  padding: 35px 0;
-  border: 1px solid #E4E7E9;
-  border-radius: 8px;
-}
-.rich-text-icons-wrapper .icon-wrapper + .icon-wrapper{
-  border-left: 1px solid #E4E7E9;
-}
-.rich-text-icons-wrapper .icon-wrapper { 
-  width: 33%;
+{% style %}
+    .rich-text-upper {
+      padding: 0!important;
+    }
   
-    /* margin-bottom: 2rem; */
-    padding: 45px 0;
-}
-
-.rich-text-icons-wrapper .icon-wrapper p { margin-top: 12px; color: #FF4438; font-size: 16px;}
-
-.rich-text-icons{
-  padding: 0 20px;
-}
-
-.rich-text__heading {
-  padding: 1.875rem 0;
-}
-
-.rich-text__heading h2 {
-  font-size: 32px;
-  line-height: 48px;
-  color: #222;
-}
-
-.rich-text__text p {
-  color: #6C6E73;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.75rem;
-}
-
-
-/* Mindflow text row */
-.text-row {
-  border-top: 1px solid #ececec;
-  margin: 2rem 0;
-  padding: 2rem 0;
-  display: flex;
-}
-
-.text-row.heading {
-  border-top: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.text-row .item {
-  width: 50%;
-  display: flex;
-  align-items: center;
-}
-
-.text-row .item.section-description p {
-  color: #393939;
-  font-size: 20px;
-  line-height: 1.2;
-}
-
-.section-label {
-  color: #767676;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 1.25rem;
-}
-
-.text-row .item h3 {
-  margin-bottom: 0;
-  margin-left: 1rem;
-  font-size: 25px;
-  font-weight: 700;
-}
-
-.text-row .item p {
-  color: #696969;
-  font-size: 16px;
-  margin-bottom: 0;
-}
-
-.text-row .item .svg {
-  background-color: #FBF2F3;
-  color: #FF4438;
-  padding: 20px;
-  border-radius: 50%;
-  width: 62px;
-  height: 62px;
-}
-
-.rich-text__heading{
-  padding: 0;
-}
-.rich-text-wrapper.heading__flex > div{
-  width: 50%;
-  text-align: left;
-}
-.rich-text-wrapper.heading__flex{
-  display: flex;
-  column-gap: 25px;
-  align-items: flex-start;
-}
-
-  .rich-text-lists p>strong{
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 36px;
-    max-width: 225px;
-    display: block;
-    color: #222222;
-    font-family: "Graphik-Regular";
-  }
-  .rich-text-lists .effects-box ul li a{
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 28px;
-    text-decoration-line: underline;
-    color: -moz-default-color;
-  }
-  .rich-text-lists .lists-wrapper ul li a{
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 28px;
-    text-decoration-line: underline;
-    color: #FF4438;
-  }
-
-  .rich-text-lists .lists-wrapper ul li{
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    position: relative;
-    line-height: 28px;
-    list-style: none;
-    color: #6C6E73;
-  }
-  .rich-text-lists .lists-wrapper ul li:before {
-    content: '';
-    position: absolute;
-    left: -32px;
-    display: block;
-    width: 16px;
-    height: 16px;
-    background: #E9ECEE;
-    border-radius: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .rich-text-lists .lists-wrapper ul li:after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: -26px;
-    width: 4px;
-    height: 4px;
-    background: black;
-    border-radius: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 50;
-  }
-
-  .heading-content .section-label{
-    margin-bottom: 15px;
-  }
-  .heading-content h3{
-    font-style: normal;
-    font-weight: normal;
-    font-size: 44px;
-    line-height: 64px;
-    color: #222222;
-  }
-  .heading-content p{
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 28px;
-    color: #6C6E73;
-    max-width: 630px;
-  }
-  @media (max-width: 1250px) {
-    .items-container{
-      justify-content: center;
+    .l-content {
+      color: #000000;
     }
-    .rich-text-lists.effects-bg{
-      padding-right: 80px;
-      padding-left: 80px;
+  
+    .panal {
+      overflow: hidden;
+      transition: all .5s ease-out;
+      max-height: fit-content;
     }
-    .rich-text-lists{
-      padding-right: 80px;
-      padding-left: 80px;
+  
+    .rich-text-lists {
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      padding: 115px 165px 75px 165px;
     }
-  }
-  @media (max-width: 970px) {
-    .rich-text-lists.effects-bg{
-      padding-right: 30px;
-      padding-left: 30px;
+  
+    .rich-text-lists .lists-wrapper {
+      padding: 30px;
+      position: relative;
     }
-    .rich-text-lists{
-      padding-right: 30px;
-      padding-left: 30px;
+  
+    .rich-text-lists .lists-wrapper ul {
+      padding-left: 2rem;
+      margin-bottom: .5rem;
     }
-  }
-  @media (max-width: 1110px) {
-      .text-row.heading .image img {
-        max-width: 100%;
-        border-radius: 0;
+  
+    .rich-text-lists .lists-wrapper ul li {
+      list-style: disc;
+      font-size: 16px;
+    }
+  
+    .rich-text-lists p>strong {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 24px;
+      line-height: 36px;
+      max-width: 225px;
+      display: block;
+      color: #222222;
+      font-family: "Graphik-Regular";
+    }
+  
+    .rich-text-lists .lists-wrapper ul li a {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 28px;
+      text-decoration-line: underline;
+      color: #FF4438;
+    }
+  
+    .rich-text-lists .lists-wrapper ul li {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      position: relative;
+      line-height: 28px;
+      list-style: none;
+      color: #6C6E73;
+    }
+  
+    .rich-text-lists .lists-wrapper ul li:before,
+    .rich-text-lists .lists-wrapper ul li:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: #E9ECEE;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  
+    .rich-text-lists .lists-wrapper ul li:after {
+      width: 4px;
+      height: 4px;
+      background: black;
+      left: -26px;
+    }
+  
+    @media (max-width: 1250px) {
+      .rich-text-lists {
+        padding-right: 80px;
+        padding-left: 80px;
       }
-  }
-
-    @media(max-width:768px){
-      .item-1{
+    }
+  
+    @media (max-width: 970px) {
+      .rich-text-lists {
+        padding-right: 30px;
+        padding-left: 30px;
+      }
+    }
+  
+    @media(max-width:768px) {
+      .item-1 {
         margin-bottom: 30px;
       }
-      .rich-text-upper{
+  
+      .rich-text-upper {
         padding: 20px!important;
       }
+  
       .rich-text-lists h1 {
-        margin: 32px 0;
-      }
-      .rich-text-lists h1{
         font-size: 24px;
         line-height: 26px;
         text-align: left;
       }
-      .items{
-        gap: 16px;
-      }
-      .img-text{
-        padding: 0;
-      }
-      .icons-red{
-        width: 50px;
-        height: 50px;
-      }
-      .panal{
+  
+      .panal {
         max-height: unset;
       }
-      .items-container{
-        display: block;
-        width: 100%;
-      }
-      .rich-text-lists.effects-bg{
-        padding: 0 16px 42px 16px;
-      }
-      .items {
-        display: flex;
-        flex-direction: column;
-      }
-      .lists-wrapper{
-        padding: 15px;
-      }
+  
       .rich-text-lists {
         flex-direction: column;
-        /* padding: 0 30px; */
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        padding: 0 16px;
       }
-  .richtext-heading{
-    text-align: center;
-  }
-      .text-row.heading{
-        flex-wrap: wrap;
-        flex-direction: column-reverse;
-        margin-bottom: 20px;
+  
+      .lists-wrapper {
+        padding: 15px;
       }
-      .heading-content {
-        margin-top: 32px;
+  
+      .rich-text-lists p>strong {
+        font-size: 20px;
+        line-height: 32px;
       }
-      .heading-content {
-        margin: 0 auto;
-        text-align: left;
-      }
-  .rich-text-wrapper.heading__flex{
-    flex-direction: column;
-    align-items: center;
-  }
-  .rich-text-wrapper.heading__flex > div{
-    width: 100%;
-    text-align: left;
-  }
-  .rich-text{
-    padding: 0;
-    margin-top: 0.5rem;
-  }
-  .rich-text__heading h2{
-    font-size: 28px;
-    line-height: 44px;
-    margin-bottom: 16px;
-  }
-  .rich-text-icons{
-    padding: 0;
-  }
-  .rich-text-icons-wrapper{
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-    margin: 72px auto;
-    margin-bottom: 63px!important;
-  }
-
-  .rich-text-icons-wrapper .icon-wrapper + .icon-wrapper{
-    border-left: 0;
-    border-top: 1px solid #E4E7E9;
-  }
-  .rich-text-icons-wrapper .icon-wrapper{
-    padding: 32px 0;
-  }
-
-  .rich-text-icons-wrapper .icon-wrapper{
-    width: 75%;
-  }
-
-  .rich-text-lists .lists-wrapper{
-    border-top: 1px solid #E4E7E9;
-    padding: 10px;
-    width: 100%;
-  }
-
-  .lists-wrapper p{
-    margin: 0;
-  }
-
-  .rich-text-lists p>strong{
-    font-size: 20px;
-    line-height: 32px;
-  }
-
-  .rich-text-lists .lists-wrapper ul{
-    margin-top: 16px;
-  }
-
-  .rich-text-icons-wrapper{
-
-  }
-  .rich-text-lists{
-    flex-direction: column;
-    padding: 0 16px;
-  }
-
-      .l-content{
-        display: none;
-      }
-
-      .lists-wrapper p:after {
-        content: url("{{ "dropdown-arrow.svg" | asset_url }}");
-        position: absolute;
-        top: 27px;
-        right: 10px;
-      }
+  
+      .lists-wrapper p:after,
       .lists-wrapper p.visible:after {
-        content: url("{{ "dropdown-red-arrow.svg" | asset_url }}");
-        font-size: 15px;
+        content: url("{{ 'dropdown-arrow.svg' | asset_url }}");
         position: absolute;
         top: 27px;
         right: 10px;
       }
-      .l-content.visible{
+  
+      .l-content.visible {
         display: block;
       }
+    }
+{% endstyle %}
 
-      .heading-content h3 {
-        font-size: 28px;
-        line-height: 44px;
-        margin-bottom: 0;
-        max-width: 100%;
-      }
-
-}
-
-</style>
-
-<script>
-
-  if ($(window).width() < 749) {
+{% javascript %}
+    // Check if the window width is less than 749 pixels
+    if ($(window).width() < 749) {
+    // Select all paragraph elements within elements having class 'lists-wrapper'
     var titleTrigger = $('.lists-wrapper p');
-    titleTrigger.click(function (){
-      $(this).closest(".lists-wrapper").find('.l-content').slideToggle(250);
-      if ( $(this).hasClass('visible')){
-        $(this).removeClass('visible');
-      } else {
-        // $('.site-footer-block-title').removeClass('visible');
-        if ($('.lists-wrapper p').not(this).hasClass('visible')){
-          $('.lists-wrapper p.visible ').not(this).closest(".lists-wrapper").find('.l-content').slideToggle(250);
-          $('.lists-wrapper p').not(this).removeClass('visible');
 
+    // Add a click event listener to each selected paragraph element
+    titleTrigger.click(function (){
+        // Toggles the visibility of the '.l-content' element within the closest '.lists-wrapper' parent
+        // The toggle happens with a sliding animation over 250 milliseconds
+        $(this).closest(".lists-wrapper").find('.l-content').slideToggle(250);
+
+        // Check if the clicked paragraph has the class 'visible'
+        if ($(this).hasClass('visible')){
+        // If it does, remove the 'visible' class
+        $(this).removeClass('visible');
+        } else {
+        // If it does not have the 'visible' class
+
+        // Check if any other paragraph elements (excluding the current one) have the 'visible' class
+        if ($('.lists-wrapper p').not(this).hasClass('visible')){
+            // If they do, toggle their '.l-content' elements and remove their 'visible' class
+            $('.lists-wrapper p.visible').not(this).closest(".lists-wrapper").find('.l-content').slideToggle(250);
+            $('.lists-wrapper p').not(this).removeClass('visible');
         }
+        // Add the 'visible' class to the clicked paragraph
         $(this).addClass('visible');
-      }
+        }
     });
-  }
-</script>
+    }
+{% endjavascript %}
