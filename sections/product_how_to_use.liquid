@@ -40,7 +40,7 @@
                 <!-- Right section for image content -->
                 <div class="right">
                     <!-- Conditionally display an image if it is not blank -->
-                    {% unless image == blank %}
+                    {% unless image == empty %}
                         {{ image.src | image_url: width: 560 | image_tag }}
                     {% endunless %}
                 </div>
