@@ -1,43 +1,118 @@
 {
-    "sections": {
-        "breadcrumbs": {
-            "type": "breadcrumbs"
-        },
-        "main": {
-            "type": "product-template"
-        },
-        "product_manual": {
-            "type": "product_manual"
-        },
-        "product_features": {
-            "type": "product_features"
-        },
-        "product_ingredients": {
-            "type": "product_ingredients"
-        },
-        "product_how_to_use": {
-            "type": "product_how_to_use"
-        },
-        "about-product": {
-            "type": "about-product"
-        },
-        "custom_reviews_app": {
-            "type": "custom_reviews_app"
-        },
-        "product_products-slider": {
-            "type": "product_products-slider"
-        },
-        "product_faq": {
-            "type": "product_faq"
-        }, 
-        "footer-newsletter": {
-            "type": "footer-newsletter"
-        }, 
-        "product_tmp_code": {
-            "type": "product_tmp_code"
-        }
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
     },
-    "order": ["breadcrumbs", "main", "product_manual","product_features", "product_ingredients", "product_how_to_use" ,"about-product", "custom_reviews_app", 
-        "product_products-slider", "product_faq", "footer-newsletter",
-        "product_tmp_code"]
-  }
+    "main": {
+      "type": "product-template",
+      "settings": {
+        "show_quantity_selector": false,
+        "show_vendor": false,
+        "enable_payment_button": true,
+        "show_share_buttons": true,
+        "media_size": "medium",
+        "enable_image_zoom": true,
+        "enable_video_looping": false,
+        "blog_for_product": "",
+        "icon-text1": "",
+        "tooltip1": "",
+        "tooltip-btn1": "",
+        "tooltip-url1": "",
+        "icon-text2": "",
+        "tooltip2": "",
+        "tooltip-btn2": "",
+        "tooltip-url2": "",
+        "icon-text3": "",
+        "tooltip3": "",
+        "tooltip-btn3": "",
+        "tooltip-url3": "",
+        "icon-text4": "",
+        "icon-text5": "",
+        "icon-text6": ""
+      }
+    },
+    "product_manual": {
+      "type": "product_manual",
+      "settings": {
+        "btn_text": "Zobrazit návod"
+      }
+    },
+    "product_features": {
+      "type": "product_features",
+      "settings": {
+      }
+    },
+    "product_ingredients": {
+      "type": "product_ingredients",
+      "settings": {
+        "more_info": "Více informací",
+        "text_c": "Certifikát",
+        "text_s": "Studie"
+      }
+    },
+    "product_how_to_use": {
+      "type": "product_how_to_use",
+      "settings": {
+        "icon": "shopify:\/\/shop_images\/hand.png"
+      }
+    },
+    "about-product": {
+      "type": "about-product",
+      "settings": {
+        "section__heading": "",
+        "acordion1": "",
+        "acordion2": "",
+        "acordion3": "",
+        "acordion4": ""
+      }
+    },
+    "custom_reviews_app": {
+      "type": "custom_reviews_app",
+      "settings": {
+      }
+    },
+    "product_products-slider": {
+      "type": "product_products-slider",
+      "settings": {
+        "button_label": "",
+        "button_link": "",
+        "background_color": ""
+      }
+    },
+    "product_faq": {
+      "type": "product_faq",
+      "settings": {
+        "section_heading": "FAQ"
+      }
+    },
+    "footer-newsletter": {
+      "type": "footer-newsletter",
+      "settings": {
+        "section_title": "Přihlaste se k odběru novinek",
+        "subheading": "<p>Získejte informace o propagačních akcích, nových produktech a slevách – přímo do své schránky.<\/p>",
+        "show_background": true
+      }
+    },
+    "product_tmp_code": {
+      "type": "product_tmp_code",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "main",
+    "product_manual",
+    "product_features",
+    "product_ingredients",
+    "product_how_to_use",
+    "about-product",
+    "custom_reviews_app",
+    "product_products-slider",
+    "product_faq",
+    "footer-newsletter",
+    "product_tmp_code"
+  ]
+}
